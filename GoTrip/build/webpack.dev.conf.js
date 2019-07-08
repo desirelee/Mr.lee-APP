@@ -45,6 +45,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $:'jquery',
+      jQuery:'jquery',
+      "windows.jQuery":'jquery',
+      popper:['popper.js','default'],
+    }),
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
