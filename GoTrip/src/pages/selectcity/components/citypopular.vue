@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div  class='citypopular' 
-                ref='wrapper'>
+        <div class='citypopular' ref='wrapper'>
             <div>
                 <div class='area-title-active' ref='a'>热门城市</div>
                 <div class='area'>
@@ -93,7 +92,8 @@ export default {
 </script>
 <style scoped>
     .citypopular{
-        position: fixed;
+        position: absolute;
+        z-index:0;
         overflow:hidden;
         width:100%;
         top:1.83rem;
@@ -101,7 +101,7 @@ export default {
         }
         .area-title-active{
             /* float:left; */
-            /* position: absolute; */
+            /* position: fixed; */
             top:0;
             left:0; 
             color: darkgray;
@@ -139,7 +139,7 @@ export default {
         li.city{
             height:0.7rem;
             line-height:0.7rem;
-            margin-left:0.2rem;
+            margin-left:0.3rem;
             margin-right:0.6rem
             }
 </style>

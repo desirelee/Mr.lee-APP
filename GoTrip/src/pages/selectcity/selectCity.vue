@@ -1,6 +1,6 @@
 <template>
     <div>
-        <city-header></city-header>
+        <city-header :citynav='cityNav'></city-header>
         <city-popular :citydata='cityData' :navtopopular='navtoPopular' @changenav="scrolltonav"></city-popular>
         <city-navigator :citynav='cityNav' :scrollmsg='scrollMsg' @changedata="datatocitylist"></city-navigator>
     </div>

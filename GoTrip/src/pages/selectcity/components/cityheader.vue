@@ -1,40 +1,113 @@
 <template>
     <div class='header'>
-        <div class='cityheader'>
-            <router-link to="/">
-                <div class='city-header-left'>
-                    <div class='iconfont icon-down'>&#xe655;</div>
+        <div>
+            <div class='cityheader'>
+                <router-link to="/">
+                    <div class='city-header-left'>
+                        <div class='iconfont icon-down'>&#xe655;</div>
+                    </div>
+                </router-link>
+                <div class='city-header-right'>
+                    <span class='iconfont search-icon'>&#xe666;</span>
+                    <input class='search-text' v-model='keyword' type='text' placeholder="输入城市中文或拼音">
                 </div>
-            </router-link>
-            <div class='city-header-right'>
-                <span class='iconfont search-icon'>&#xe666;</span>
-                <input class='search-text' type='text' placeholder="输入城市中文或拼音">
+            </div>
+            <div class='popular-header border-bottom'>
+                <div class='popular-header-content'>
+                    <span class='iconfont icon-location'>&#xe665;</span>
+                    当前定位城市 {{city}}
+                </div>
             </div>
         </div>
-        <div class='popular-header border-bottom'>
-            <div class='popular-header-content'>
-                <span class='iconfont icon-location'>&#xe665;</span>
-                当前定位城市 {{city}}
-            </div>
+        <transition name='fade'>
+        <div class='search-content' v-show='listshow' ref="wrapper">
+            <ul>
+                <li class='search-city border-bottom' v-for='item in list' :key="item.id">{{item}}</li>
+            </ul>
         </div>
+        </transition>
     </div>
 </template>
 <script>
+import BScroll from 'better-scroll';
 export default {
     name:'cityheader',
     data(){
         return{
-            city:'广州'
+            city:'广州',
+            keyword:'',
+            list:[],
+            listshow:false
         }
-    }
+    },
+    mounted() {
+         this.scroll = new BScroll(this.$refs.wrapper);
+    },
+    watch:{
+        keyword(){
+            if(this.timer){
+                clearTimeout(this.timer)
+            }
+            if(!this.keyword){
+                this.list=[];
+                this.listshow=false;
+                return
+            }
+            else{
+            this.listshow=true;
+            this.timer=setTimeout(() => {
+                const newlist=[]
+                for(let i in this.citynav){
+                this.citynav[i].forEach(value => {
+                    if(value.spell.match(this.keyword)||value.name.match(this.keyword)){
+                        newlist.push(value.name);
+                        }
+                    });
+                };
+                this.list=newlist;
+            }, 100);}
+           
+        }
+    },
+    props:{citynav:Object}
 }
 </script>
 <style scoped>
+/* 这里是Vue自带的过渡动画 */
+        .fade-leave-to,
+        .fade-enter{
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+        .fade-enter-active,
+        .fade-leave-active{
+            transition:all 0.5s ease;
+        }
+        .fade-move{
+            transition: all 0.5s ease;
+        }
+/* 这里是Vue自带的过渡动画 */
+
     .header{
-        position:fixed;
          width:100%;
          background: white;
     }
+    .search-content{
+        position:absolute;
+        z-index: 10;
+        bottom:0;
+        left:0;
+        top:1.1rem;
+        right:0;
+        background: white;
+        overflow: hidden;
+        }
+        .search-city{
+            height:0.7rem;
+            line-height:0.7rem;
+            margin-left:0.3rem;
+            margin-right:0.6rem
+        }
     .cityheader{
         display: flex;
         top:0;
@@ -80,6 +153,8 @@ export default {
                 {
                     flex:1;
                     background: rgb(236, 236, 236);
+                    font-size: 0.29rem;
+                    letter-spacing: 0.03rem;
                     height:0.64rem;
                     margin:auto 0;
                 
