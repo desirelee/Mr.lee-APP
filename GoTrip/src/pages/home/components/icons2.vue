@@ -1,8 +1,8 @@
 <template>
     <div class='icons'>
-        <div :class="item.id<=5?'icon':'icon-xs'" v-for='(item) in iconlist' :key="item.id">
+        <div :class="item.id<=5?'icon':'icon-xs'" v-for='item in iconlistin' :key="item.id">
             <div :class="item.id<=5?'icon-img':'icon-img-xs'">
-                <img :class="item.id<=5?'icon-img-resource':'icon-img-resource-xs'" :src='item.imgurl'>
+                <img :class="item.id<=5?'icon-img-resource':'icon-img-resource-xs'" :src="item.imgurl">
             </div>
             <p :class="item.id<=5?'icon-text':'icon-text-xs'" v-cloak>{{item.text}}</p>
         </div>
@@ -13,7 +13,7 @@ export default {
     name:'HomeIcons2',
     data() {
         return {
-            iconlist:[
+            iconlistin:[
                 {
                     id:1,
                     imgurl:require('@/assets/img/group.png'),
@@ -21,7 +21,7 @@ export default {
                 },
                 {
                     id:2,
-                    imgurl:require('@/assets/img/bargainflight.png'),
+                    imgurl:require('@/assets/img/flight.png'),
                     text:'低价机票'
                 },
                 {
@@ -29,22 +29,22 @@ export default {
                     imgurl:require('@/assets/img/kezhan.png'),
                     text:'客栈'
                 },
-                {
+                 {
                     id:4,
                     imgurl:require('@/assets/img/haiwai.png'),
                     text:'海外酒店'
                 },
-                {
+                 {
                     id:5,
                     imgurl:require('@/assets/img/inn.png'),
-                    text:'名宿'
+                    text:'民宿'
                 },
-                {
+                 {
                     id:6,
                     imgurl:require('@/assets/img/car.png'),
                     text:'专车自驾'
                 },
-                {
+                 {
                     id:7,
                     imgurl:require('@/assets/img/freeTravel.png'),
                     text:'自由行'
@@ -89,10 +89,18 @@ export default {
                     imgurl:require('@/assets/img/oversea.png'),
                     text:'换外币'
                 },
-            ],
-            
+            ]
         }
     },
+    methods: {
+        
+    },
+    computed:{
+
+    },
+    props:{
+        iconlist:Array,
+    }
 }
 </script>
 <style lang="stylus" scoped>

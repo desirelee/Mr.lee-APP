@@ -1,12 +1,19 @@
 <template>
+<div>
     <div class='header'>
         <div class='header-left'>
             <div class="iconfont back-icon">&#xe652;</div>
         </div>
         <div class='header-input'>
-            <span class='iconfont search-icon'>&#xe666;</span>输入城市/景点/游玩主题</div>
-        <div class='header-right'><span class='iconfont location-icon'>&#xe665;</span>城市</div>
+            <span class='iconfont search-icon'>&#xe666;</span>输入城市/景点/游玩主题
+        </div>
+        <router-link to="/selectcity">
+            <div class='header-right'>
+                <span class='iconfont location-icon'>&#xe665;</span>{{selectcity}}
+            </div>
+        </router-link>
     </div>
+</div>
 </template>
 <script>
 export default {
@@ -16,6 +23,9 @@ export default {
             
         }
     },
+    props:{
+        selectcity:String
+    }
 }
 </script>
 <style lang='stylus' scoped>
@@ -50,6 +60,7 @@ export default {
         float:right
         line-height: .86rem
         text-align:center
+        color:white
         .location-icon
             font-size:.31rem
             margin-right:.04rem
