@@ -1,7 +1,7 @@
 <template>
     <div class='icons'>
         <div :class="item.id<=5?'icon':'icon-xs'" v-for='item in iconlistin' :key="item.id">
-            <div :class="item.id<=5?'icon-img':'icon-img-xs'">
+            <div :class="item.id<=5?'icon-img':'icon-img-xs'"  @click="linkTopages(item.id)">
                 <img :class="item.id<=5?'icon-img-resource':'icon-img-resource-xs'" :src="item.imgurl">
             </div>
             <p :class="item.id<=5?'icon-text':'icon-text-xs'" v-cloak>{{item.text}}</p>
@@ -93,7 +93,11 @@ export default {
         }
     },
     methods: {
-        
+        linkTopages(iconid){
+            if(iconid==9){
+                this.$router.push('/taobao/5555');
+            }
+        }
     },
     computed:{
 

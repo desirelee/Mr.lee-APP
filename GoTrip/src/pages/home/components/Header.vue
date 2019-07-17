@@ -9,13 +9,14 @@
         </div>
         <router-link to="/selectcity">
             <div class='header-right'>
-                <span class='iconfont location-icon'>&#xe665;</span>{{selectcity}}
+                <span class='iconfont location-icon'>&#xe665;</span>{{this.city}}
             </div>
         </router-link>
     </div>
 </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
     name:'homeheader',
     data() {
@@ -23,9 +24,12 @@ export default {
             
         }
     },
-    props:{
-        selectcity:String
-    }
+    computed: {
+        ...mapState(['city']),
+    },
+    // props:{
+    //     selectcity:String
+    // }
 }
 </script>
 <style lang='stylus' scoped>

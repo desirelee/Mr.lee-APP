@@ -15,14 +15,15 @@
             <div class='popular-header border-bottom'>
                 <div class='popular-header-content'>
                     <span class='iconfont icon-location'>&#xe665;</span>
-                    当前定位城市 {{city}}
+                    当前定位城市 {{this.city}}
                 </div>
             </div>
         </div>
         <transition name='fade'>
         <div class='search-content' v-show='listshow' ref="wrapper">
             <ul>
-                <li class='search-city border-bottom' v-for='item in list' :key="item.id">{{item}}</li>
+                <li class='search-city border-bottom' v-for='item in list' :key="item.id" 
+                    @click='changecity(item)'>{{item}}</li>
             </ul>
         </div>
         </transition>
@@ -30,18 +31,34 @@
 </template>
 <script>
 import BScroll from 'better-scroll';
+/////这是VueX中的方法，可以将Vuex中的state里面的值映射过来
+import {mapState, mapMutations} from 'vuex'
+
 export default {
     name:'cityheader',
     data(){
         return{
-            city:'广州',
             keyword:'',
             list:[],
-            listshow:false
+            listshow:false,
+           
         }
+    },
+    computed: {
+         ...mapState(['city']),
+        //  ...mapState{currrentcity:'city'},可以是数组 ，也可以是对象
     },
     mounted() {
          this.scroll = new BScroll(this.$refs.wrapper);
+    },
+    methods:{
+        changecity(city){
+            this.listshow=false;
+            this.keyword ='';
+            this.changeCity(city);
+            this.$router.push('/');
+        },
+        ...mapMutations(['changeCity'])
     },
     watch:{
         keyword(){
@@ -81,11 +98,11 @@ export default {
         }
         .fade-enter-active,
         .fade-leave-active{
-            transition:all 0.5s ease;
+            transition:all 0.3s ease;
         }
-        .fade-move{
+        /* .fade-move{
             transition: all 0.5s ease;
-        }
+        } */
 /* 这里是Vue自带的过渡动画 */
 
     .header{

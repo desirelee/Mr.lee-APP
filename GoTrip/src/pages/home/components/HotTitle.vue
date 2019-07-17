@@ -7,8 +7,8 @@
                     <img :class="item.id%2==0?'img-two':'img-one'" :src='item.imgurl'>
                 </div>
                 <div :class="item.id%2==0?'two-img-text':'one-img-text'">
-                    <p class='content'>含往返飞机票+6晚住宿</p>
-                    <p class="price">￥3390</p>
+                    <p class='content'>{{item.content}}</p>
+                    <p class="price">￥{{item.price}}</p>
                 </div>
             </div>
         </div>
@@ -22,19 +22,27 @@ export default {
             leftlist:[
                 {
                     id:1,
-                    imgurl:require('@/assets/img/leshandafo.jpg')
+                    imgurl:require('@/assets/img/leshandafo.jpg'),
+                    content:'含往返飞机票+6晚住宿',
+                    price:3349
                 },
                 {
                     id:2,
-                    imgurl:require('@/assets/img/dishini.jpg')
+                    imgurl:require('@/assets/img/dishini.jpg'),
+                    content:'含往门票和香港岛内游',
+                    price:4549
                 },
                  {
                     id:3,
-                    imgurl:require('@/assets/img/paifang.jpg')
+                    imgurl:require('@/assets/img/paifang.jpg'),
+                    content:'温泉度假+各景点门票',
+                    price:1235
                 },
                 {
                     id:4,
-                    imgurl:require('@/assets/img/threeumbra.jpg')
+                    imgurl:require('@/assets/img/threeumbra.jpg'),
+                    content:'顺德吃喝游玩+哥顿酒店入住',
+                    price:4582
                 },
             ]
             
@@ -98,11 +106,10 @@ export default {
                 right:0
                 bottom:0
                 .content
-                    text-align:center
+                    padding-left:.05rem
                     font-size:.3rem
                 .price
                     margin-top:.1rem
-                    padding-left:.11rem
                     font-size:.5rem
                     color:$pricecolor
                     overflow:hidden
@@ -137,11 +144,11 @@ export default {
                 right:0
                 bottom:0
                 .content
-                    text-align:center
+                    // text-align:center
+                    padding-left:.05rem
                     font-size:.3rem
                 .price
                     margin-top:.1rem
-                    padding-left:.11rem
                     font-size:.5rem
                     color:$pricecolor
                     overflow:hidden

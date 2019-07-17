@@ -6,7 +6,7 @@
                 <div class='area'>
                     <div class='button-list'>
                         <div class='button-wrapper' v-for="item of citydata.hotCity" :key="item.id">
-                            <div class='button'>
+                            <div class='button' @click="changecity(item.name)">
                                 {{item.name}}</div>
                         </div>
                     </div>
@@ -14,7 +14,7 @@
                 <div class='area' v-for='(item,key) in citydata.city' :key="key" :ref='key'>
                     <div class='area-title' >{{key}}</div>
                     <ul class='city-list'>
-                        <li class='city border-bottom' v-for='inneritem in item' :key="inneritem.id">{{inneritem.name}}</li>
+                        <li class='city border-bottom' @click="changecity(inneritem.name)" v-for='inneritem in item' :key="inneritem.id">{{inneritem.name}}</li>
                     </ul>
                 </div>
             </div>   
@@ -23,7 +23,7 @@
 </template>
 <script>
 import BScroll from 'better-scroll'
-
+import {mapState,mapMutations} from 'vuex'
 export default {
     name:'cityofpolular',
     data() {
@@ -38,6 +38,11 @@ export default {
         navtopopular:String,
     },
     methods:{
+        ...mapMutations(['changeCity']),
+        changecity(city){
+            this.changeCity(city);
+            this.$router.push('/');
+        },
         scrollling(){
                 this.scroll.on('scroll',(pos)=>{
                     let position =Math.floor(Math.abs(

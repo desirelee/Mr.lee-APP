@@ -1,6 +1,6 @@
 <template>
     <div>
-        <home-header :selectcity='selectCity'></home-header>
+        <home-header></home-header>
         <home-swiper></home-swiper>
         <icons></icons>
         <icons2 :iconlist='iconlist'></icons2>
@@ -14,13 +14,15 @@ import Icons from './components/Icons'
 import Icons2 from './components/icons2'
 import HotTitle from './components/HotTitle'
 import axios from 'axios'
+import {mapState} from 'vuex'
 
 export default {
     name:'Home',
     data(){
         return{
             iconlist:[],
-            selectCity:''
+            selectCity:'',
+            lastcity:''
         }
     },
     components:{
@@ -30,9 +32,12 @@ export default {
         Icons2:Icons2,
         HotTitle:HotTitle,
     },
+    computed: {
+        ...mapState(['city'])
+    },
     methods:{
         getHomeInfo(){
-            axios.get('/static/test/index.json')
+            axios.get('/static/test/index.json?'+this.city)
                 .then(this.getHomeInfoSucc)
         },
         getHomeInfoSucc(res){
@@ -44,6 +49,13 @@ export default {
     },
     mounted() {
         this.getHomeInfo()
+    },
+    activated() {
+        if(this.lastcity!==this.city){
+            this.getHomeInfo()
+            this.lastcity=this.city
+        }
+        
     },
 
 }

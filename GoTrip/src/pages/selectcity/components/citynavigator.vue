@@ -65,14 +65,13 @@ export default {
     watch: {
         scrollmsg(){
             if(this.items!=''||this.scrollmsg=='no'){
-                    this.$refs[this.items][0].style.backgroundColor= '';
+                    if(this.items!=''){
+                    this.$refs[this.items][0].style.backgroundColor= '';}
                 }
             if(this.scrollmsg!='no'&&this.scrollmsg!=0){
                 this.$refs[this.scrollmsg][0].style.backgroundColor= 'orange';
                 this.items=this.scrollmsg;
-                }
-            
-        }
+                }}
     },
  
 }
